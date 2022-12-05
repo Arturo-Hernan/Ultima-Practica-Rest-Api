@@ -1,0 +1,51 @@
+apiVersion: apps/v1                               
+kind: Deployment
+metadata:
+  name: www
+  labels:
+    app: reticula-de-sistemas
+spec:
+  selector:
+    matchLabels:                
+      app: reticula-de-sistemas
+      tier: www             
+  replicas: 7
+  template:		                
+    metadata:
+      labels:
+        app: reticula-de-sistemas
+        tier: www
+    spec:
+      containers:
+      - name: reticula-de-sistemas
+        image: /etc/docker/www
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: base-de-datos
+spec:
+  selector:
+    matchLabels:                              
+      app: base-de-datos
+      tier: mysql
+  replicas: 1                                 
+  template:                                   
+    metadata:
+      labels:
+        app: base-de-datos
+        tier: mysql
+    spec:
+      containers:                             
+      - name: base-de-datos
+        image: /etc/docker/bd
+        ports:                                
+        - containerPort: 3306
+        volumeMounts:                         
+        - name: persistencia-master
+          mountPath: /var/lib/mysql
+      volumes:
+        - name: persistencia-master
+          persistentVolumeClaim:
+            claimName: persistencia-claim
+               

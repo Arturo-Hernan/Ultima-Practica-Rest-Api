@@ -1,0 +1,27 @@
+apiVersion: v1                 
+kind: Service
+metadata:
+  name: www
+  labels:
+    app: reticula-de-sistemas
+    tier: www
+spec:
+  type: NodePort
+  ports:    
+  - port: 80
+  selector:                     
+    app: reticula-de-sistemas
+    tier: www
+kind: Service
+metadata:
+  name: base-de-datos
+  labels:                        
+    app: base-de-datos
+    tier: mysql  
+spec:
+  ports:                         
+  - port: 3306
+    targetPort: 3306
+  selector:                      
+    app: base-de-datos
+    tier: mysql

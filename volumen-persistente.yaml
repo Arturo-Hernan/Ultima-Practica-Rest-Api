@@ -1,0 +1,24 @@
+apiVersion: v1                           
+kind: PersistentVolume 
+metadata:
+  name: persistencia-master
+  labels:
+    type: local
+spec:
+  storageClassName: masterfiles
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/master"                       
+kind: PersistentVolumeClaim
+metadata:
+  name: persistencia-claim
+spec:
+  storageClassName: masterfiles
+  accessModes: 
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
