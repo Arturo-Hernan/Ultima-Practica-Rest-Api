@@ -4,7 +4,7 @@ RUN apt-get update
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql 
 
-COPY ./Crud/ /var/www/html/
+COPY ./www/var/www/html/
 
 CMD /usr/sbin/apache2ctl -D FOREGROUND
 
